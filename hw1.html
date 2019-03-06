@@ -1,0 +1,374 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+     "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+
+<head>
+<title>EECS 132: Homework Assignment 1</title>
+</head>
+
+<body>
+<h2>Programming Project 1</h2>
+<h3>Due Friday, October 6 at 11:59pm</h3>
+
+
+<p><em><strong>IMPORTANT:</strong> Read the 
+<strong>Do's and Dont's</strong>
+in the <strong>Course Honor Policy</strong> found on blackboard. </em>
+</p>
+
+<h3>I. Overview</h3>
+
+<p>The theme of this assignment is to write code to for a bookkeeper to manage assets and income.
+The purpose is to give you practice writing classes, fields, methods, conditional statements, and
+constructors.  You will also be introduced to polymorphism.</p>
+
+<hr>
+
+<h3>II. Code Readability (20% of your project grade)</h3>
+
+<p>Once upon a time, getting a program to work was the only goal of programming.  That was
+before computers took over the world.  Now, with highly complex software running much of our lives,
+the industry has learned that computer code is a written document that must be able to communicate
+to other humans what the code is doing.  If the program is too hard for a human to quickly understand,
+the company does not want it.</p> 
+
+<p>Most companies enforce readable code by having very strict rules about how the program should look.
+This class will do the same, but will not be quite as strict so you can have some freedom for developing
+your own style.</p>
+
+<p><strong>To receive the full readability marks, your code must follow the following guideline:</strong>
+<ul>
+<li>All variables (fields, parameters, local variables) must be given appropriate and descriptive names.</li>
+<li>All variable and method names must start with a lowercase letter.  All class names must start with an uppercase letter.</li>
+<li>The class body should be organized so that all the fields are at the top of the file, the 
+constructors are next, and then the rest of the methods.</li>
+<li>Every statement of the program should be on it's own line and not sharing a line with another statement.</li>
+<li>All code must be properly indented (see page 689 of the Lewis book for an example of good style).
+    The amount of indentation is up to you, but it should be at least 2 spaces, and it must be used
+    consistently throughout the code.</li>
+<li>You must be consistent in your use of {, }.  The closing } must be on its own line and indented
+the same amount as the line containing the opening {.</li>
+<li>There must be an empty line between each method.</li>
+<li>There must be a space separating each operator from its operands as well as a space after each comma.</li>
+<li>There must be a comment at the top of the file that includes both your name and a description of what the class represents.</li>
+<li>There must be a comment directly above each method that, in one or two lines, states <em>what</em>
+task the method is doing, not how it is doing it.  Do not directly copy the homework instructions.</li>
+<li>There must be a comment directly above each field that, in one line, states what the field is storing.</li>
+<li>There must be a comment either above or to the right of each non-field variable indicating what the variable is storing.  Any comments placed to the right should be aligned so they start on the same column.</li>
+</ul>
+</p>
+
+<hr>
+
+<h3>III. Program Testing Document (20% of your project grade)</h3>
+
+<p>Once upon a time, companies thought errors in code were only a minor inconvenience.
+That was before software glitches started killing people and destroying companies.
+Now, standard practice is that all code must be thoroughly verified before a company is willing to release it.
+At a large number of firms, programmers are required to <em>first</em> design the test cases the 
+program must pass and <em>then</em> start writing the code.  We will not be that strict in this 
+class, but you will need to test your code.</p>
+
+<p><strong>To receive full testing marks, you must write a testing report that shows that you thoroughly
+tested every method of the program.</strong>  The report should be a short English description for each
+test (what you are testing and what the expected result of the test is) followd by the 
+actual result of the test.  If you are using DrJava, you can enter the test into the interactions pane
+and then copy and paste the test code plus the result to your report.  If you fail to complete
+the program, your report should indicate how you would go about testing the incomplete methods.</p>
+
+<p><strong>Your grade on the testing report is how thoroughly you test your code, not how correctly
+your code runs.</strong>  If your code is not 100% correct then your report <em>should</em> show
+an incorrect result to some test.  Testing methods that do not have conditional statements should
+be pretty straightforward, but you need to put thought into testing methods with conditional
+statements so that each branch of the if-statement is tested.</p>
+
+<p><em>Hint 1</em>: You can test multiple methods with one test.  For example, you can test 
+each setter/getter method pair together or you can test constructors and getter methods together.</p>
+
+<p><strong><em>Hint 2: Do not put off testing to the end!</em></strong>  Test each method after you complete it.
+Many methods depend on other methods.  Delaying testing could mean cascading errors that cause your
+whole project to collapse.  Since you need to test anyway, copy the tests you do into a document, and
+you are most of the way to completing your report.</p>
+
+<p>If you are not using DrJava, you are allowed (but not required) create a separate class that tests your program.
+You must still write a testing report that documents the tests you do in this class.  Do not
+place testing code into a main method of the classes below.  That is not the purpose
+of a main method.</p>
+
+<hr>
+
+<h3>IV. Java Programming (60% of your grade)</h3>
+
+<p><strong>Guidelines for the program</strong>:
+<ul>
+<li>Unless specifically indicated, the listed methods must be public.</li>
+<li>You will need to create several instance fields to store data, and every field must be private.</li>
+<li>All fields must be initialized to an appropriate value.  They can be initialized either as part
+if the field declaration or in the constructor.  Even if you feel that the default value provided by Java
+is appropriate, you still must give an explicit initialization.</li>
+<li>Any method whose name begins with <tt>set</tt> should only assign a value to an appropriately
+named field.  The method should do no other processing.  Any processing described in a <tt>set</tt>
+method description below is for information only.  That actual processing will be done by other methods.
+</li>
+<li>Any method whose name begins with <tt>get</tt> should only return the appropriate value.
+No other processing should occur in these methods.</li>
+<li>Your class must include only the methods listed.  You may not write any other methods.</li>
+<li>The behavior of your methods must match the descriptions below.</li>
+<li>You should not write any loops in your program (though loops are allowed in the testing code).</li>
+</ul>
+</p>
+
+<p><strong>The program:</strong> You will create the following classes.  The classes are listed in order of challenge from
+more straightforward to more challenging.</p> 
+<ol><li><p><tt>Asset</tt><br>
+The <tt>Asset</tt> represents any tangible property that has a value. 
+The <tt>Asset</tt> class will need instance fields to keep track of the name of the asset, a description of the asset,
+the cost basis of the asset (how much you spent to acquire it), the current price someone is willing to buy the asset for,  and the capital gains for 
+the asset (how much profit you made when/if you sold it).
+The class will have the
+following methods:
+<ol type="a">
+  <li><tt>getName</tt><br> Takes no input and returns a <tt>String</tt>.
+      Returns the name of the asset.</li>
+  <li><tt>setName</tt><br> Takes a single <tt>String</tt> as input and returns nothing.
+      The name of the asset is changed to the input value.</li>
+  <li><tt>getDescription</tt><br> Takes no input and returns a <tt>String</tt>.
+      Returns a description of what the asset is.</li>
+  <li><tt>setDescription</tt><br> Takes a single <tt>String</tt> value as input and returns nothing.
+      The description of the asset is changed to the input value.</li>
+  <li><tt>getCostBasis</tt><br> Takes no input and returns a <tt>double</tt>.
+      Returns the cost basis of the asset (how much you paid to acquire it).</li>
+  <li><tt>setCostBasis</tt><br> A <em>protected</em> method that takes a single <tt>double</tt> as input and returns nothing.
+      Changes the cost basis of the asset.</li>
+  <li><tt>getCurrentPrice</tt><br> Takes no input and returns a <tt>double</tt>.
+    Returns the current price of the asset.</li>
+  <li><tt>setCurrentPrice</tt><br> Takes a single <tt>double</tt> value and returns nothing.
+    The input value is the current price of the asset.</li>
+  <li><tt>getCapitalGains</tt><br> Takes no input and returns a <tt>double</tt>.
+      Returns the capital gains from the asset (how much profit you made when selling all or part of it).</li>
+  <li><tt>setCapitalGains</tt><br> A <em>protected</em> method that takes a single <tt>double</tt> as input and returns nothing.
+      Changes the capital gains of the asset.</li>
+</ol></p>
+<p>The <tt>Asset</tt> class will have one constructor:
+<ul>
+<li>The constructor takes two inputs: a <tt>String</tt> 
+that is the asset name and a <tt>double</tt> that is the cost basis for the asset.</li>
+The asset should be created with an initial capital gains of 0.
+</ul>
+</p></li>
+
+<li><p><tt>Bond</tt><br>
+A <tt>Bond</tt> instance represents an asset that is a loan from a government or corporation.  The <tt>Bond</tt> class should extend
+the <tt>Asset</tt> class.  The <tt>Bond</tt> class has the same features as the <tt>Asset</tt> class with the following additions.
+The <tt>Bond</tt> class should include additional fields to keep track of the principal of the bond,
+the interest rate of the bond, and the number of bonds owned.
+The <tt>Bond</tt> class should have the following additonal methods:
+<ol type="a">
+<li><tt>getPrincipal</tt> takes no input and returns an <tt>int</tt>.  Returns the principal of the bond.  (The principal does not change.)</li>
+<li><tt>getInterestRate</tt> takes no input and returns a <tt>double</tt>.  Returns the interest rate of the bond.</li>
+<li><tt>setInterestRate</tt> takes a single <tt>double</tt> as input and returns nothing.  Changes the interest rate for the bond to the input value.</li>
+<li><tt>payInterest</tt> takes no input and returns a <tt>double</tt>. Returns the product of the interest rate and the principal.</li>
+<li><tt>buy</tt></br> Takes no inputs and returns a <tt>double</tt>.
+The method purchased a bond.  The cost basis is increased by the current price, the current price is returned, and the number of bonds owned is increased by 1.</li>
+<li><tt>sell</tt></br> Takes no inputs and returns a <tt>double</tt>.
+The method sells a bond. If there are no bonds owned, the method returns 0. 
+Otherwise, the cost basis is reduced by (<em>cost basis</em> / <em>number of bonds owned</em>), the capital gains is increased by the
+difference between the current price and the amount the cost basis was reduced,
+and the number of bonds owned is decreased by 1.  The current price is returned.</li>
+<li><tt>getNumberOwned</tt><br>Takes no input and returns an <tt>int</tt> that is the number of bonds owned.</li>
+</ol>
+</p>
+<p>
+The <tt>Bond</tt> class should have one constructor:
+<ul>
+<li>the constructor takes three inputs: a <tt>String</tt> that is the name of the bond, an <tt>int</tt> that is the principal, and <tt>double</tt> that is the interest rate.
+The current price should be set to equal the principal.  The initial cost basis should be 0.</li>
+</ul>
+</p></li>
+
+<li><p><tt>Equity</tt><br>
+An <tt>Equity</tt> represents an asset where you can own shares of the asset.  The <tt>Equity</tt>
+class should extend the <tt>Asset</tt> class.  The <tt>Equity</tt> class has the same features as the 
+<tt>Asset</tt> class plus the following additions.
+The <tt>Equity</tt> class should have additional instance fields to keep track of the symbol
+of the equity and the number of shares owned of the equity.
+For the purposes of this homework, all equities will have single 
+character symbols.
+The <tt>Equity</tt> class will have the
+following additional methods:
+<ol type="a">
+  <li><tt>getSymbol</tt><br> takes no input and returns a <tt>char</tt>.
+    Returns the single character symbol of the equity.  (The equity's symbol does not change.)</tt>
+  <li><tt>getNumberShares</tt><br> Takes no input and returns a <tt>double</tt>.
+    Returns the number of shares of the equity.</li>
+  <li><tt>setNumberShares</tt><br> A <em>protected</em> method that takes a single <tt>double</tt> value as input and returns nothing.
+    The input value is the number of shares of the equity.</li>
+</ol>
+</p>
+<p>The <tt>Equity</tt> class has one constructor.
+<ul>
+  <li>the constructor takes three inputs: a <tt>String</tt> that is the name of the equity, a <tt>char</tt> that is the symbol,
+      and a <tt>double</tt> that is the current price.  The equity should be created with an initial cost basis of 0.</li>
+</ul>
+</p></li>
+
+<li><p><tt>MutualFund</tt><br>
+A <tt>MutualFund</tt> instance represents an equity that is the shares of a mutual fund.  The <tt>MutualFund</tt> class should extend
+the <tt>Equity</tt> class.  The <tt>MutualFund</tt> class has the same features as the <tt>Equity</tt> class with the following additions.
+The <tt>MutualFund</tt> should have an additional field that stores the &quot;load&quot; of the fund.
+The <tt>MutualFund</tt> class should have the following additonal methods:
+<ol type="a">
+<li><tt>getLoad</tt><br> Takes no inputs and returns a <tt>double</tt>.  Returns the current load of the mutual fund. (The load is a percentage that is charged on all sales of the fund.)</li>
+<li><tt>setLoad</tt><br> Takes a single <tt>double</tt> as input and returns nothing.  Changes the load of the mutual fund to be the input value.</li>
+<li><tt>buy</tt></br> Takes a <tt>double</tt> as input that the amount of money you are investing in the mutual fund.
+The method returns a <tt>double</tt>.
+If the money amount is not positive, the method returns 0 and does nothing.
+Otherwise, the method
+increases the number of shares owned in the mutual fund by <em>input amount <tt>x</tt> (<tt>100% -</tt> load) <tt>/</tt> current price</em>.
+The cost basis is increased by the input amount, and the input amount is returned.</li>
+<li><tt>sell</tt></br> Takes one input: an <tt>double</tt> that is amount of money you are withdrawing from the mutual fund.
+The method returns a <tt>double</tt>.
+If the input number is not positive or is larger than the current value of the mutual fund, the method should return 0 and do nothing.
+Otherwise, the number of shares owned is decreased by <em>amount withdrawn <tt>/</tt> current price</em>.  
+The cost basis is decreased by the ratio of the number of shares sold to the number of shares
+owned prior to this sale. (For example, if you sell 1/3 of your shares, the cost basis should decrease by 1/3.)
+The capital gains is increased by the difference between the amount withdrawn and the
+amount that the cost basis decreased.  The method returns the amount withdrawn.</li>
+</ol>
+</p>
+<p>
+The <tt>MutualFund</tt> class should have one constructor:
+<ul>
+<li>the constructor takes three inputs: a <tt>String</tt> that is the name of the mutual fund, a <tt>char</tt> that is the symbol, and a <tt>double</tt> that is the current price.</li>
+</ul>
+</p></li>
+
+<li><p><tt>Stock</tt><br>
+A <tt>Stock</tt> instance represents an equity that is the shares of stock in a company.  The <tt>Stock</tt> class should extend
+the <tt>Equity</tt> class.  The <tt>Stock</tt> class has the same features as the <tt>Equity</tt> class with the following additions.
+The <tt>Stock</tt> class should have the following additonal methods:
+<ol type="a">
+<li><tt>buy</tt></br> Takes two inputs: an <tt>int</tt> that is the number of shares and a <tt>double</tt> that is the commission.
+The method returns a <tt>double</tt>. The method increases the number of shares owned in the stock by the input value.
+The method computes the value <em>z = n <tt>x</tt> p <tt>+</tt> c</em> where <em>n</em> is the input number of shares, <em>p</em> is the current price per share,
+and <tt>c</tt> is the input commission.  The method should increase the cost basis for the stock by <em>z</em> and return <em>z</em>.</li>
+<li><tt>sell</tt></br> Takes two inputs: an <tt>int</tt> that is the number of shares and a <tt>double</tt> that is the commission.
+The method returns a <tt>double</tt>.
+If the input number of shares is greater than the number currently owned, the method returns 0 and makes no other changes.
+Otherwise, the number of shares owned is decreased by the input number of shares.  The cost basis is decreased by the ratio of the input number of shares to the number of shares
+owned prior to this sale. (For example, if you sell 1/3 of your shares, the cost basis should decrease by 1/3.)
+The capital gains is increased by the difference between <em>(the number of shares sold <tt>x</tt> the current price) <tt>-</tt> the commission</em> and the
+amount that the cost basis decreased.  The method returns <em>(the number of shares sold <tt>x</tt> the current price) <tt>-</tt> the commission</em>.</li>
+<li><tt>split</tt><br> Takes two inputs, a <tt>int</tt> that is the ratio numerator and an <tt>int</tt> that is the ratio denominator.
+The method should return a <tt>double</tt>. If either input value is zero, nothing is done and 0 is returned.
+Otherwise, the number of owned shares changes
+by the ratio <em>numerator / denominator</em>. (For example, <tt>split(2,1)</tt> should double the number of shares while <tt>split(1,2)</tt> should result in one half the number
+of shares.)
+If the resulting number of shares contains a fractional share (not a whole number), then the fractional
+share must be sold so that the final number of shares is a whole number.
+Follow the same logic as for the <tt>sell</tt> method except that no commission is charged,
+ and the value returned should be the same as what would be returned by the <tt>sell</tt> method if the commission were 0.
+If there is no fractional share (the initial result of the split is a whole number), then 0 should be returned.</p></li>
+</ol>
+</p>
+<p>
+The <tt>Stock</tt> class should have one constructor:
+<ul>
+<li>the constructor takes three inputs: a <tt>String</tt> that is the name of the stock, a <tt>char</tt> that is the symbol, and a <tt>double</tt> that is the current price.</li>
+</ul>
+</p></li>
+
+<li><p><tt>CashAsset</tt><br>  The <tt>CashAsset</tt> class represents money reserves.
+The <tt>CashAsset</tt> class will need fields to keep track of 
+the current balance, the interest rate paid for savings, the interest rate changed for loans, the limit that can be loaned, an overdraft penalty, 
+the amount of interest accrued this month (but not paid), and whether the account has been overdrafted.
+The class should have the following methods.
+<ol type="a">
+<li><tt>getBalance</tt><br> Takes no input and returns a <tt>double</tt>. Returns the current balance in the account.</li>
+<li><tt>getSavingsRate</tt><br> Takes no input and returns a <tt>double</tt>.  Returns the interest rate applied to positive balances.</li>
+<li><tt>setSavingsRate</tt><br> Takes a single <tt>double</tt> as input and returns nothing. Changes the interest rate applied to positive balances.</li>
+<li><tt>getLoanRate</tt><br> Takes no input and returns a <tt>double</tt>. Returns the interest rate applied to negative balances.</li>
+<li><tt>setLoanRate</tt><br> Takes a single <tt>double</tt> as input and returns nothing. Changes the interest rate applied to negative balances.</li>
+<li><tt>getLoanLimit</tt><br> Takes no input and returns a <tt>double</tt>.  Returns the loan limit for the account.</li>
+<li><tt>setLoanLimit</tt><br> Takes a single <tt>double</tt> as input and returns nothing. Changes the loan limit for the account.</li>
+<li><tt>getOverdraftPenalty</tt><br> Takes no input and returns a <tt>double</tt>. Returns the overdraft penalty for the account.</li>
+<li><tt>setOverdraftPenalty</tt><br> Takes a single <tt>double</tt> as input and returns nothing.  Changes the overdraft penalty for the account.</li>
+<li><tt>deposit</tt><br> Takes a single <tt>double</tt> as input and returns nothing. Increases the balance by <tt>amount</tt>.</li>
+<li><tt>withdraw</tt><br> Takes a <tt>double</tt> and a <tt>boolean</tt> as input and returns a <tt>boolean</tt>.
+If the input <tt>boolean</tt> is <tt>false</tt> and if the input <tt>double</tt> is greater than the account balance, the method returns <tt>false</tt> and makes no changes to the
+account balance.  Otherwise, the method returns <tt>true</tt> and reduces the balance by the input amount.</li>
+<li><tt>processDay</tt><br> Takes no input and returns nothing.  If the account balance is positive, multiplies the balance by the savings rate (divided by 365) and adds the amount to the
+accrued monthly interest.  If the account balance is negative, multiplies the balance by the loan rate (divided by 365) and adds the (negative) amount to the
+accrued monthly interest.</li>
+<li><tt>processMonth</tt><br> Takes no input and returns nothing.  Adds the accrued monthly interest to the balance and resets the accrued monthly interest to zero.
+If the account balance plus the accrued monthly interest was negative and exceeded the (negation) of the loan limit at any time
+that <tt>processDay</tt> was called since the last time <tt>processMonth</tt> was called, the overdraft penalty is subtracted from the balance.</li>
+<li><em>(Optional)</em> <tt>getAccruedInterest</tt><br> Takes no input and returns nothing.  Returns the current accrued monthly interest amount.  This method is optional because
+it was not included in the original assignment posting.</li>
+<li><em>(Optional)</em> <tt>setAccruedInterest</tt><br> A <em>protected</em> method that takes a single <tt>double</tt> as input and returns no value.  Changes the accrued interest
+for the month to the input value.</li>
+</ol></p>
+<p>
+The <tt>Cash</tt> class should have a single constructor:
+<ul>
+<li>the constructor takes four inputs: a  <tt>double</tt> that is the interest rate for savings, a <tt>double</tt> that is the interest rate for loans, a <tt>double</tt> that is the loan limit,
+and a <tt>double</tt> that is the overdraft penalty.</li>
+</ul>
+</p></li>
+
+<li><p><tt>Customer</tt><br>  The <tt>Customer</tt> class represents a customer account.
+The class should have fields to keep track of a stock instance, a bond instance, a mutual fund instance, a cash account, and a commission rate.
+The class should have the following methods.
+<ol type="a">
+<li><tt>getBond</tt><br> Takes no input and returns a value of type <tt>Bond</tt>. Returns a bond instance associated with this account.</li>
+<li><tt>setBond</tt><br> Takes an input of type <tt>Bond</tt> and returns nothing.  Changes the bond instance associated with this account.</li>
+<li><tt>getMutualFund</tt><br> Takes no input and returns a value of type <tt>MutualFund</tt>. Returns a mutual fund instance associated with this account.</li>
+<li><tt>setMutualFund</tt><br> Takes an input of type <tt>MutualFund</tt> and returns nothing.  Changes the mutual fund instance associated with this account.</li>
+<li><tt>getStock</tt><br> Takes no input and returns a value of type <tt>Stock</tt>. Returns a stock instance associated with this account.</li>
+<li><tt>setStock</tt><br> Takes an input of type <tt>Stock</tt> and returns nothing.  Changes the stock instance associated with this account.</li>
+<li><tt>getCashAccount</tt><br> Takes no input and returns a value of type <tt>CashAsset</tt>. Returns the cash account associated with this account.</li>
+<li><tt>setCashAccount</tt><br> Takes an input of type <tt>CashAsset</tt> and returns nothing.  Changes the cash account associated with this account.</li>
+<li><tt>getCommissionAmount</tt><br> Takes no input and returns a <tt>double</tt>. Returns the commission amount for the account.</li>
+<li><tt>setCommissionAmount</tt><br> Takes a single <tt>double</tt> as input and returns nothing. Changes the commission amount for the account.</li>
+<li><tt>currentValue</tt><br> Takes no input and returns a <tt>double</tt>. Returns the cash account balance plus the current price of the bond plus
+the number of shares times the current price for both the stock and the mutual fund (if these all exist).</li>
+<li><tt>getCapitalGains</tt><br> Takes no input and returns a <tt>double</tt>.  Returns the sum of the capital gains of the bond, mutual fund, and stocks, if they exist.</li>
+<li><tt>deposit</tt><br> Takes a <tt>double</tt> and returns no value.   Adds the input amount to the cash account balance.</li>
+<li><tt>withdraw</tt><br> Takes a <tt>double</tt> as input and returns a <tt>boolean</tt>.  Calls the <tt>withdraw</tt> method of the cash account with the <tt>boolean</tt> set to
+<tt>false</tt> in order to withdraw the desired amount (if it exists in the acccount).  The method returns the value returned by the cash account <tt>withdraw</tt> method.</li> 
+<li><tt>sellBond</tt><br>Takes no input and returns nothing.  Calls the bond's <tt>sell</tt> method and deposits the value returned into the cash account's balance.</li>
+<li><tt>buyBond</tt><br>Takes no input and returns a <tt>boolean</tt>.  If the current price of the bond is larger than the customer's current value, the method returns <tt>false</tt>
+and does nothing else.  Otherwise, the bond's <tt>buy</tt> method is called and the amount returned is subtracted from the cash account's balance. (Call the cash account's <tt>withdraw</tt>
+method with the boolean set to <tt>true</tt> to force the withdrawal even if the funds are not there.)</li>
+<li><tt>payBondInterest</tt><br>Takes no input and does nothing.  Call's the bond's <tt>payInterest</tt> method and deposits the value returned into the cash account.</li>
+<li><tt>withdrawMutualFund</tt><br>Takes a single <tt>double</tt> as input that is the amount to withdraw and returns nothing.
+Calls the mutual fund's <tt>sell</tt> method with this number and adds the amount returned to the cash balance.</li>
+<li><tt>buyMutualFund</tt><br>Takes a single <tt>double</tt> as input and returns a <tt>boolean</tt>.  If the input value is larger than the current value of the customer,
+the method returns <tt>false</tt> and does nothing else.  Otherwise, the method call's the mutual fund's <tt>buy</tt> method with the input
+value, the cash account balance is reduced by the amount returned from the <tt>buy</tt> method and <tt>true</tt> is returned.</li>
+<li><tt>sellStockShares</tt><br>Takes a single <tt>int</tt> input that is a number of shares and returns nothing.
+ Calls the Stock <tt>sell</tt> method with this number of shares and the account commission value and adds the amount returned to the
+cash balance.</li>
+<li><tt>buyStockShares</tt><br> Takes an <tt>int</tt> as input that is the number of shares to sell and returns a <tt>boolean</tt>. 
+If the result of calling the stock <tt>buy</tt> method with given number of shares and the account commission amount would cost more
+than the customer's current value, the method returns <tt>false</tt> and does nothing else.
+Otherwise, the stock <tt>buy</tt> method is called
+with the appropriate values, the cash balance is reduced by the amount returned from the <tt>buy</tt> method, and <tt>true</tt> is returned.</li>
+</ol></p>
+<p>
+The <tt>Customer</tt> class should have two constructors:
+<ul>
+<li>The first constructor takes two inputs: a <tt>CashAsset</tt> that represents the cash account and a <tt>double</tt> that is the commission.</li>
+<li>The second constructor takes five inputs: a <tt>CashAsset</tt> that is the cash account, a <tt>Bond</tt>, a <tt>MutualFund</tt>, a <tt>Stock</tt> and a <tt>double</tt> that is the commission.</li>
+</ul>
+</p></li>
+
+<hr>
+
+<h3>V. Submitting Your Project</h3>
+<p>Submit the <tt>.java</tt> files (not the <tt>.class</tt> files or the <tt>.java~</tt> files) for each
+of your seven classes plus the testing report on Canvas.</p>
+
+</body>
+</html>

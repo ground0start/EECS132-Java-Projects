@@ -3,6 +3,7 @@
 public class Equity extends Asset{
    
    /* A field represents the symbol of the equity*/
+   //Ming
    private final char symbol;
    
    /* A field represents the your share of the equity*/
